@@ -15,10 +15,6 @@ public class Smoke : MonoBehaviour
             smoke = this;
             DontDestroyOnLoad(gameObject);
         }
-        else if (smoke != null)
-        {
-            Destroy(gameObject);
-        }
     }
 
     

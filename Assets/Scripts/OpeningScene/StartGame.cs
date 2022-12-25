@@ -5,10 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class StartGame : MonoBehaviour
 {
+    BlueSmoke bluerSmoke;
 
     private void Start()
     {
-        // Find all relevant objects
+        // Find all irrelevant objects according to level01 
         GameObject.Find("SoundManager");
         GameObject.Find("Smoke");
         GameObject.Find("BlueSmoke");
@@ -16,13 +17,16 @@ public class StartGame : MonoBehaviour
 
     public void OnClickButton()
     {
-        // When the function load level01, destroy all relevant objects (smoke effect and the music background)
+        // When the function load level01, destroy all irrelevant objects (smoke effect and the music background)
         SceneManager.LoadScene("Level01");
 
         if (Smoke.smoke != null)
         {
             Destroy(Smoke.smoke.gameObject);
         }
+
+        //BlueSmoke.blue = null;      example for getting a static variable.
+        //bluerSmoke.    example for not getting the static variable , the static variable is not accessible.
 
         if (BlueSmoke.blueSmoke != null)
         {

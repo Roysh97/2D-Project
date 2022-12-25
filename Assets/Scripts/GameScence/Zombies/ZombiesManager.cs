@@ -6,14 +6,16 @@ public class ZombiesManager : MonoBehaviour
 {
     public GameObject player01;
     public GameObject zombie01;
-    public GameObject zombie01Patrol;
     public GameObject zombie01Rise;
     public GameObject zombie02;
     public GameObject zombie03;
 
-    int numOfZombies;
+    public GameObject zombie01Trapped;
+    public GameObject zombie03Trapped;
+
     float x;
-    float y;
+    float disX;
+    float disX2;
 
     public AudioSource audioSource;
     public AudioClip bloodSound;
@@ -22,9 +24,7 @@ public class ZombiesManager : MonoBehaviour
     void Start()
     {
         Instantiate(zombie01, zombie01.transform.position, zombie01.transform.rotation);
-        Instantiate(zombie01Patrol, zombie01Patrol.transform.position, zombie01Patrol.transform.rotation);
-
-        numOfZombies = 3;
+        Instantiate(zombie01, new Vector2(zombie01.transform.position.x + 16, zombie01.transform.position.y), zombie01.transform.rotation);
     }
 
     // Update is called once per frame
@@ -33,56 +33,63 @@ public class ZombiesManager : MonoBehaviour
          // Instantiate all the zombies by triggers all over the map
     }
 
-    public void ZombieTrigger()
-    {
-        Instantiate(zombie01Rise, new Vector2(player01.transform.position.x - 4, zombie01Rise.transform.position.y), zombie01Rise.transform.rotation);
-    }
-
     public void TwoZombiesTrigger()
     {
         Instantiate(zombie01Rise, new Vector2(player01.transform.position.x - 4, zombie01Rise.transform.position.y), zombie01Rise.transform.rotation);
         Instantiate(zombie01Rise, new Vector2(player01.transform.position.x + 4, zombie01Rise.transform.position.y), zombie01Rise.transform.rotation);
     }
+
+    public void ZombieTrigger()
+    {
+        int i = 6;
+
+        disX = 5;
+
+        while (i > 0)
+        {
+
+            Instantiate(zombie01Rise, new Vector2(player01.transform.position.x - disX, zombie01Rise.transform.position.y), zombie01Rise.transform.rotation);
+
+            disX -= -2;
+
+            i--;
+        }
+    }
     
     public void MultiZombiesTriggerR()
     {
-        int i = numOfZombies;
+        int i = 12;
 
-        if (i == 3)
+        disX2 = 5;
+
+        while (i > 0)
         {
-            while (i > 0)
-            {
-                x = Random.Range(-5f, 22f);
-                y = Random.Range(-20f, -20f);
+            x = Random.Range(-1f, 22f);
 
-                Instantiate(zombie01, new Vector2(x, y), zombie01.transform.rotation);
-                Instantiate(zombie01Patrol, new Vector2(x, y), zombie01Patrol.transform.rotation);
+            Instantiate(zombie01Rise, new Vector2(player01.transform.position.x + disX2, -20), zombie01Rise.transform.rotation);
 
-                i--;
-            }
+            disX2 += 2;
+
+            i--;
         }
 
         i = 2;
 
-        if (i == 2)
+        while (i > 0)
         {
-            while (i > 0)
-            {
-                x = Random.Range(39f, 54f);
-                y = Random.Range(-20f, -20f);
+            x = Random.Range(39f, 54f);
 
-                Instantiate(zombie03, new Vector3(x, y , 0), zombie03.transform.rotation);
+            Instantiate(zombie03, new Vector3(x, -20f, 0), zombie03.transform.rotation);
 
-                i--;
-            }
+            i--;
         }
 
         i = 1;
 
         if (i == 1)
         {
-            Instantiate(zombie03, new Vector2(51.2f, -61.595f), zombie03.transform.rotation);
-            Instantiate(zombie01Patrol, new Vector3(44.38f, -17.97f, 2f), zombie01Patrol.transform.rotation);
+            Instantiate(zombie03Trapped, new Vector2(51.2f, -61.595f), zombie03Trapped.transform.rotation);          // all trapped zombies in game  
+            Instantiate(zombie01Trapped, new Vector3(48.08f, -17.32f, 2f), zombie01Trapped.transform.rotation);
 
             i--;
         }
@@ -90,15 +97,24 @@ public class ZombiesManager : MonoBehaviour
 
     public void MultiZombiesTrigger2()
     {
-        int i = numOfZombies;
-        i = 2;
+        int i = 3;
 
         while (i > 0)
         {
             x = Random.Range(104, 111);
-            y = Random.Range(-56.7f, -56.7f);
+           
+            Instantiate(zombie02, new Vector2(x, -56.7f), zombie02.transform.rotation);
 
-            Instantiate(zombie02, new Vector2(x, y), zombie02.transform.rotation);
+            i--;
+        }
+
+        i = 4;
+
+        while (i > 0)
+        {
+            x = Random.Range(69, 81);
+            
+            Instantiate(zombie03, new Vector2(x, -58.22f), zombie03.transform.rotation);
 
             i--;
         }
@@ -107,23 +123,10 @@ public class ZombiesManager : MonoBehaviour
 
         while (i > 0)
         {
-            x = Random.Range(76.75f, 80.77f);
-            y = Random.Range(-58.22f, -58.22f);
-
-            Instantiate(zombie03, new Vector2(x, y), zombie03.transform.rotation);
-
-            i--;
-        }
-
-        i = 1;
-
-        while (i > 0)
-        {
-            x = Random.Range(94.44f, 104);
-            y = Random.Range(-61.35f, -61.35f);
-
-            Instantiate(zombie03, new Vector2(x, y), zombie03.transform.rotation);
-            Instantiate(zombie01, new Vector2(x, y), zombie01.transform.rotation);
+            x = Random.Range(93, 105);
+         
+            Instantiate(zombie03, new Vector2(x, -61.35f), zombie03.transform.rotation);
+            Instantiate(zombie01, new Vector2(x, -61.35f), zombie01.transform.rotation);
 
             --i;
         }
@@ -131,31 +134,24 @@ public class ZombiesManager : MonoBehaviour
 
     public void MultiZombiesTrigger3()
     {
-        Instantiate(zombie02, new Vector2(158, -57.84f), zombie02.transform.rotation);
+        int i = 2;
 
-        int i = numOfZombies;
+        while (i > 0)
+        {
+            x = Random.Range(148, 160);
+           
+            Instantiate(zombie02, new Vector2(x, -56.96f), zombie02.transform.rotation);
+
+            i--;
+        }
+
         i = 4;
 
         while (i > 0)
         {
-            x = Random.Range(151.71f, 163);
+            x = Random.Range(146, 163);
 
             Instantiate(zombie03, new Vector2(x, -61.32f), zombie03.transform.rotation);
-
-            i--;
-        }
-    }
-
-    public void MultiZombiesTrigger4()
-    {
-        int i = numOfZombies;
-        i = 5;
-
-        while (i > 0)
-        {
-            x = Random.Range(214.5f, 236.43f);
-
-            Instantiate(zombie02, new Vector2(x, -62.9f), zombie02.transform.rotation);
 
             i--;
         }

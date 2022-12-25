@@ -5,7 +5,7 @@ using UnityEngine;
 public class Quit : MonoBehaviour
 {
     // Quit game function
-public void QuitButton()
+    public void QuitButton()
     {
         Application.Quit();
         Debug.Log("Quit Game");

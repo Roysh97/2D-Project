@@ -6,16 +6,14 @@ public class BlueSmoke : MonoBehaviour
 {
     public static BlueSmoke blueSmoke;
 
+    public static BlueSmoke blue;
+
     private void Awake()
     {
         if (blueSmoke == null)
         {
             blueSmoke = this;
             DontDestroyOnLoad(gameObject);
-        }
-        else if (blueSmoke != null)
-        {
-            Destroy(gameObject);
         }
     }
 }

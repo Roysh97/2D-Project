@@ -4,20 +4,25 @@ using UnityEngine;
 
 public class AcidDrown : MonoBehaviour
 {
-    float speed;
+    Rigidbody2D rb;
 
     // Start is called before the first frame update
     void Start()
     {
-        speed = 0.01f;
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
-            transform.Translate(0, -speed * Time.deltaTime, 0);
-
+     
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "DrownStop")
+        {
+            rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        }
+    }
 }
